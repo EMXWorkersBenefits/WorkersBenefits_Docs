@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="emx_workers_benefits" id="Project_494c80d" template="Default" database="MySql" >
+	<schema name="workers_benenfits" catalogname="workers_benenfits" >
+		<table name="admin_person_settings" >
+			<column name="setting_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="admin_person_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="setting_key" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="settings_value" type="varchar" length="500" decimal="0" jt="12" mandatory="y" />
+			<column name="last_updated" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_admin_person_settings" unique="PRIMARY_KEY" >
+				<column name="setting_id" />
+			</index>
+			<index name="admin_person_id_UNIQUE" unique="UNIQUE" >
+				<column name="admin_person_id" />
+			</index>
+			<fk name="admin_person_id_FK" to_schema="workers_benenfits" to_table="admin_persons" >
+				<fk_column name="admin_person_id" pk="admin_person_id" />
+			</fk>
+		</table>
+		<table name="admin_persons" >
+			<column name="admin_person_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="first_name" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="phone_number" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="active" type="boolean" length="1" decimal="0" jt="-7" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<column name="last_update" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_admin_persons" unique="PRIMARY_KEY" >
+				<column name="admin_person_id" />
+			</index>
+		</table>
+		<table name="categories" >
+			<column name="category_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="name" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="title" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="image" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="magnitude" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_categories" unique="PRIMARY_KEY" >
+				<column name="category_id" />
+			</index>
+		</table>
+		<table name="companies" >
+			<column name="company_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="name" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="address" type="varchar" length="500" decimal="0" jt="12" mandatory="y" />
+			<column name="phone_number" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="contact_person_name" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="contact_person_phone" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="registration_date" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_companies" unique="PRIMARY_KEY" >
+				<column name="company_id" />
+			</index>
+		</table>
+		<table name="company_person_settings" >
+			<column name="setting_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="company_person_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="setting_key" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="settings_value" type="varchar" length="500" decimal="0" jt="12" mandatory="y" />
+			<column name="last_updated" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_company_person_settings" unique="PRIMARY_KEY" >
+				<column name="setting_id" />
+			</index>
+			<index name="company_person_id_FK_idx" unique="NORMAL" >
+				<column name="company_person_id" />
+			</index>
+			<fk name="company_person_id_FK" to_schema="workers_benenfits" to_table="company_persons" >
+				<fk_column name="company_person_id" pk="company_person_id" />
+			</fk>
+		</table>
+		<table name="company_persons" >
+			<column name="company_person_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="company_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="first_name" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="phone_number" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="active" type="boolean" length="1" decimal="0" jt="-7" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<column name="last_update" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_company_persons" unique="PRIMARY_KEY" >
+				<column name="company_person_id" />
+			</index>
+			<index name="company_id_idx" unique="NORMAL" >
+				<column name="company_id" />
+			</index>
+			<fk name="company_id_FK" to_schema="workers_benenfits" to_table="companies" >
+				<fk_column name="company_id" pk="company_id" />
+			</fk>
+		</table>
+		<table name="orders" >
+			<column name="order_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="worker_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="credit_card_auth_id" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="charge_amount" type="decimal" length="10" decimal="0" jt="3" mandatory="y" />
+			<column name="order_date" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
+			<column name="comments" type="varchar" length="500" decimal="0" jt="12" />
+			<index name="pk_orders" unique="PRIMARY_KEY" >
+				<column name="order_id" />
+			</index>
+			<index name="workier_id_fk_idx" unique="NORMAL" >
+				<column name="worker_id" />
+			</index>
+			<fk name="workier_id_fk" to_schema="workers_benenfits" to_table="workers" >
+				<fk_column name="worker_id" pk="worker_id" />
+			</fk>
+		</table>
+		<table name="product_types" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_product_types" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="products" >
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="category_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="product_type_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="image" type="varchar" length="500" decimal="0" jt="12" mandatory="y" />
+			<column name="title" type="varchar" length="500" decimal="0" jt="12" mandatory="y" />
+			<column name="price" type="decimal" length="10" decimal="0" jt="3" mandatory="y" />
+			<column name="restrictions" type="varchar" length="500" decimal="0" jt="12" mandatory="y" />
+			<column name="description" type="varchar" length="500" decimal="0" jt="12" />
+			<column name="popup" type="varchar" length="500" decimal="0" jt="12" >
+				<comment><![CDATA[the url to the product page]]></comment>
+			</column>
+			<index name="pk_products" unique="PRIMARY_KEY" >
+				<column name="product_id" />
+			</index>
+			<index name="category_id_idx" unique="NORMAL" >
+				<column name="category_id" />
+			</index>
+			<index name="product_type_id_idx" unique="NORMAL" >
+				<column name="product_type_id" />
+			</index>
+			<fk name="category_id" to_schema="workers_benenfits" to_table="categories" >
+				<fk_column name="category_id" pk="category_id" />
+			</fk>
+			<fk name="product_type_id" to_schema="workers_benenfits" to_table="product_types" >
+				<fk_column name="product_type_id" pk="id" />
+			</fk>
+		</table>
+		<table name="roles" >
+			<column name="Id" type="varchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="Name" type="varchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_roles" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+		</table>
+		<table name="userclaims" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="UserId" type="varchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="ClaimType" type="longtext" length="2147483647" decimal="0" jt="-1" />
+			<column name="ClaimValue" type="longtext" length="2147483647" decimal="0" jt="-1" />
+			<index name="pk_userclaims" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<index name="UserId" unique="NORMAL" >
+				<column name="UserId" />
+			</index>
+			<fk name="ApplicationUser_Claims" to_schema="workers_benenfits" to_table="users" delete_action="cascade" >
+				<fk_column name="UserId" pk="Id" />
+			</fk>
+		</table>
+		<table name="userlogins" >
+			<column name="LoginProvider" type="varchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="ProviderKey" type="varchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="UserId" type="varchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_userlogins" unique="PRIMARY_KEY" >
+				<column name="LoginProvider" />
+				<column name="ProviderKey" />
+				<column name="UserId" />
+			</index>
+			<index name="ApplicationUser_Logins" unique="NORMAL" >
+				<column name="UserId" />
+			</index>
+			<fk name="ApplicationUser_Logins" to_schema="workers_benenfits" to_table="users" delete_action="cascade" >
+				<fk_column name="UserId" pk="Id" />
+			</fk>
+		</table>
+		<table name="userroles" >
+			<column name="UserId" type="varchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="RoleId" type="varchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_userroles" unique="PRIMARY_KEY" >
+				<column name="UserId" />
+				<column name="RoleId" />
+			</index>
+			<index name="IdentityRole_Users" unique="NORMAL" >
+				<column name="RoleId" />
+			</index>
+			<fk name="IdentityRole_Users" to_schema="workers_benenfits" to_table="roles" delete_action="cascade" >
+				<fk_column name="RoleId" pk="Id" />
+			</fk>
+			<fk name="ApplicationUser_Roles" to_schema="workers_benenfits" to_table="users" delete_action="cascade" >
+				<fk_column name="UserId" pk="Id" />
+			</fk>
+		</table>
+		<table name="users" >
+			<column name="Id" type="varchar" length="128" decimal="0" jt="12" mandatory="y" />
+			<column name="Email" type="varchar" length="256" decimal="0" jt="12" />
+			<column name="EmailConfirmed" type="boolean" decimal="0" jt="-7" mandatory="y" />
+			<column name="PasswordHash" type="longtext" length="2147483647" decimal="0" jt="-1" />
+			<column name="SecurityStamp" type="longtext" length="2147483647" decimal="0" jt="-1" />
+			<column name="PhoneNumber" type="longtext" length="2147483647" decimal="0" jt="-1" />
+			<column name="PhoneNumberConfirmed" type="boolean" decimal="0" jt="-7" mandatory="y" />
+			<column name="TwoFactorEnabled" type="boolean" decimal="0" jt="-7" mandatory="y" />
+			<column name="LockoutEndDateUtc" type="datetime" length="19" decimal="0" jt="93" />
+			<column name="LockoutEnabled" type="boolean" decimal="0" jt="-7" mandatory="y" />
+			<column name="AccessFailedCount" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="UserName" type="varchar" length="256" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_users" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+		</table>
+		<table name="worker_purchase_history" >
+			<column name="purchase_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="product_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="discount" type="decimal" length="10" decimal="0" jt="3" mandatory="y" />
+			<column name="final_price" type="decimal" length="10" decimal="0" jt="3" mandatory="y" />
+			<column name="purchase_date" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
+			<index name="pk_worker_purchase_history" unique="PRIMARY_KEY" >
+				<column name="purchase_id" />
+			</index>
+			<index name="product_id_fk_idx" unique="NORMAL" >
+				<column name="product_id" />
+			</index>
+			<fk name="product_id_fk" to_schema="workers_benenfits" to_table="products" >
+				<fk_column name="product_id" pk="product_id" />
+			</fk>
+		</table>
+		<table name="worker_settings" >
+			<column name="setting_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="worker_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="setting_key" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="settings_value" type="varchar" length="500" decimal="0" jt="12" mandatory="y" />
+			<column name="last_updated" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_worker_settings" unique="PRIMARY_KEY" >
+				<column name="setting_id" />
+			</index>
+			<index name="worker_id_fk1_idx" unique="NORMAL" >
+				<column name="worker_id" />
+			</index>
+			<fk name="worker_id_fk1" to_schema="workers_benenfits" to_table="workers" >
+				<fk_column name="worker_id" pk="worker_id" />
+			</fk>
+		</table>
+		<table name="workers" >
+			<column name="worker_id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="company_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="worker_number" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="id_number" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="first_name" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="150" decimal="0" jt="12" mandatory="y" />
+			<column name="phone_number" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="active" type="boolean" length="1" decimal="0" jt="-7" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<column name="last_update" type="datetime" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_workers" unique="PRIMARY_KEY" >
+				<column name="worker_id" />
+			</index>
+			<index name="company_id_idx" unique="NORMAL" >
+				<column name="company_id" />
+			</index>
+			<fk name="company_id" to_schema="workers_benenfits" to_table="companies" >
+				<fk_column name="company_id" pk="company_id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="emx_workers_benefits" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.43-bin.jar" driver_desc="Standard" host="localhost" port="3306" instance="workers_benenfits" user="root" passwd="MTIzNDU2" />
+	<layout name="Default Layout" id="Layout_5277e6" show_relation="columns" >
+		<entity schema="workers_benenfits" name="admin_person_settings" color="bfd4f5" x="270" y="570" />
+		<entity schema="workers_benenfits" name="admin_persons" color="bfd4f5" x="465" y="570" />
+		<entity schema="workers_benenfits" name="categories" color="c8f5bf" x="1080" y="570" />
+		<entity schema="workers_benenfits" name="companies" color="f5ddbf" x="660" y="45" />
+		<entity schema="workers_benenfits" name="company_person_settings" color="f5ddbf" x="270" y="300" />
+		<entity schema="workers_benenfits" name="company_persons" color="f5ddbf" x="660" y="300" />
+		<entity schema="workers_benenfits" name="orders" color="bfbff5" x="45" y="570" />
+		<entity schema="workers_benenfits" name="product_types" color="c8f5bf" x="1080" y="810" />
+		<entity schema="workers_benenfits" name="products" color="c8f5bf" x="900" y="570" />
+		<entity schema="workers_benenfits" name="roles" color="d2bff5" x="900" y="330" />
+		<entity schema="workers_benenfits" name="userclaims" color="d2bff5" x="1230" y="330" />
+		<entity schema="workers_benenfits" name="userlogins" color="d2bff5" x="1020" y="330" />
+		<entity schema="workers_benenfits" name="userroles" color="d2bff5" x="1230" y="45" />
+		<entity schema="workers_benenfits" name="users" color="d2bff5" x="1020" y="45" />
+		<entity schema="workers_benenfits" name="worker_purchase_history" color="f5ddbf" x="285" y="45" />
+		<entity schema="workers_benenfits" name="worker_settings" color="f5ddbf" x="480" y="300" />
+		<entity schema="workers_benenfits" name="workers" color="f5ddbf" x="480" y="45" />
+	</layout>
+	<layout name="Sample Layout with Groups" id="Layout_24e9ace" show_relation="columns" >
+		<entity schema="workers_benenfits" name="admin_person_settings" color="bfd4f5" x="270" y="600" />
+		<entity schema="workers_benenfits" name="admin_persons" color="bfd4f5" x="465" y="600" />
+		<entity schema="workers_benenfits" name="categories" color="c8f5bf" x="1080" y="600" />
+		<entity schema="workers_benenfits" name="companies" color="f5ddbf" x="660" y="75" />
+		<entity schema="workers_benenfits" name="company_person_settings" color="f5ddbf" x="270" y="330" />
+		<entity schema="workers_benenfits" name="company_persons" color="f5ddbf" x="660" y="330" />
+		<entity schema="workers_benenfits" name="orders" color="bfbff5" x="45" y="600" />
+		<entity schema="workers_benenfits" name="product_types" color="c8f5bf" x="1080" y="840" />
+		<entity schema="workers_benenfits" name="products" color="c8f5bf" x="900" y="600" />
+		<entity schema="workers_benenfits" name="roles" color="d2bff5" x="900" y="360" />
+		<entity schema="workers_benenfits" name="userclaims" color="d2bff5" x="1230" y="360" />
+		<entity schema="workers_benenfits" name="userlogins" color="d2bff5" x="1020" y="360" />
+		<entity schema="workers_benenfits" name="userroles" color="d2bff5" x="1230" y="75" />
+		<entity schema="workers_benenfits" name="users" color="d2bff5" x="1020" y="75" />
+		<entity schema="workers_benenfits" name="worker_purchase_history" color="f5ddbf" x="285" y="75" />
+		<entity schema="workers_benenfits" name="worker_settings" color="f5ddbf" x="480" y="330" />
+		<entity schema="workers_benenfits" name="workers" color="f5ddbf" x="480" y="75" />
+		<callout x="900" y="450" pointer="NO" >
+			<comment><![CDATA[For a better understanding of the schema create multiple layouts (diagrams). 
+Layouts will be saved to project file. One table may show in multiple layouts.
+ 
+Double-click any column, foreign key or table headers to edit.
+Create foreign keys by drag and drop of one column over a primary key column.
+Foreign keys can be marked as virtual and they won't be created in the database.]]></comment>
+		</callout>
+		<group name="workers" color="f7f3ec" >
+			<entity schema="workers_benenfits" name="workers" />
+			<entity schema="workers_benenfits" name="companies" />
+			<entity schema="workers_benenfits" name="company_persons" />
+			<entity schema="workers_benenfits" name="company_person_settings" />
+			<entity schema="workers_benenfits" name="worker_purchase_history" />
+			<entity schema="workers_benenfits" name="worker_settings" />
+		</group>
+		<group name="users" color="f0ecf7" >
+			<entity schema="workers_benenfits" name="users" />
+			<entity schema="workers_benenfits" name="userroles" />
+			<entity schema="workers_benenfits" name="userclaims" />
+			<entity schema="workers_benenfits" name="userlogins" />
+			<entity schema="workers_benenfits" name="roles" />
+		</group>
+		<group name="products" color="eef7ec" >
+			<entity schema="workers_benenfits" name="products" />
+			<entity schema="workers_benenfits" name="categories" />
+			<entity schema="workers_benenfits" name="product_types" />
+		</group>
+		<group name="admin_person_settings" color="ecf0f7" >
+			<entity schema="workers_benenfits" name="admin_person_settings" />
+			<entity schema="workers_benenfits" name="admin_persons" />
+		</group>
+		<group name="orders" color="ececf7" >
+			<entity schema="workers_benenfits" name="orders" />
+		</group>
+	</layout>
+	<layout name="Sample Layout with Relational Data Browse" id="Layout_2828617" show_relation="columns" >
+		<entity schema="workers_benenfits" name="admin_person_settings" color="bfd4f5" x="270" y="570" />
+		<entity schema="workers_benenfits" name="admin_persons" color="bfd4f5" x="465" y="570" />
+		<entity schema="workers_benenfits" name="categories" color="c8f5bf" x="1080" y="570" />
+		<entity schema="workers_benenfits" name="companies" color="f5ddbf" x="660" y="45" />
+		<entity schema="workers_benenfits" name="company_person_settings" color="f5ddbf" x="270" y="300" />
+		<entity schema="workers_benenfits" name="company_persons" color="f5ddbf" x="660" y="300" />
+		<entity schema="workers_benenfits" name="orders" color="bfbff5" x="45" y="570" />
+		<entity schema="workers_benenfits" name="product_types" color="c8f5bf" x="1080" y="810" />
+		<entity schema="workers_benenfits" name="products" color="c8f5bf" x="900" y="570" />
+		<entity schema="workers_benenfits" name="roles" color="d2bff5" x="900" y="330" />
+		<entity schema="workers_benenfits" name="userclaims" color="d2bff5" x="1230" y="330" />
+		<entity schema="workers_benenfits" name="userlogins" color="d2bff5" x="1020" y="330" />
+		<entity schema="workers_benenfits" name="userroles" color="d2bff5" x="1230" y="45" />
+		<entity schema="workers_benenfits" name="users" color="d2bff5" x="1020" y="45" />
+		<entity schema="workers_benenfits" name="worker_purchase_history" color="f5ddbf" x="285" y="45" />
+		<entity schema="workers_benenfits" name="worker_settings" color="f5ddbf" x="480" y="300" />
+		<entity schema="workers_benenfits" name="workers" color="f5ddbf" x="480" y="45" />
+		<callout x="900" y="450" pointer="NO" >
+			<comment><![CDATA[The editor below is Relational Data Browse for exploring data from multiple tables bind by foreign keys.
+If your schema is missing foreign keys create VIRTUAL foreign keys. Virtual foreign keys will be saved to project file. 
+ 
+Each browsed table on the bottom has an arrow near the title. Press it to descend into children tables .
+Right-click record headers to set filters and ordering.]]></comment>
+		</callout>
+		<browser id="Browse_169a63a" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="workers_benenfits" entity="products" x="20" y="20" width="400" height="300" >
+				<browse_table schema="workers_benenfits" entity="categories" fk="category_id" x="440" y="20" width="400" height="300" record_view="y" />
+			</browse_table>
+		</browser>
+	</layout>
+</project>
